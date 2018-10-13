@@ -7,14 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A95118D6ACBBCCB0F2989AD /* Pods_SeeFood.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B72B6342826CB6F14AB95F7D /* Pods_SeeFood.framework */; };
 		FBA65A58217191CE005688EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA65A57217191CE005688EE /* AppDelegate.swift */; };
 		FBA65A5A217191CE005688EE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA65A59217191CE005688EE /* ViewController.swift */; };
 		FBA65A5D217191CE005688EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBA65A5B217191CE005688EE /* Main.storyboard */; };
 		FBA65A5F217191D1005688EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FBA65A5E217191D1005688EE /* Assets.xcassets */; };
 		FBA65A62217191D1005688EE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBA65A60217191D1005688EE /* LaunchScreen.storyboard */; };
+		FBA65A6A2172218A005688EE /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA65A692172218A005688EE /* CameraViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		79EABED800B3DA59016E5D3A /* Pods-SeeFood.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeeFood.release.xcconfig"; path = "Pods/Target Support Files/Pods-SeeFood/Pods-SeeFood.release.xcconfig"; sourceTree = "<group>"; };
+		B72B6342826CB6F14AB95F7D /* Pods_SeeFood.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SeeFood.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E46D403A0FC7E6CA0E065D8D /* Pods-SeeFood.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeeFood.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SeeFood/Pods-SeeFood.debug.xcconfig"; sourceTree = "<group>"; };
 		FBA65A54217191CE005688EE /* SeeFood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeeFood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBA65A57217191CE005688EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FBA65A59217191CE005688EE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +27,7 @@
 		FBA65A5E217191D1005688EE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FBA65A61217191D1005688EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FBA65A63217191D1005688EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FBA65A692172218A005688EE /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +35,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A95118D6ACBBCCB0F2989AD /* Pods_SeeFood.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		825D4388AC509657083A7547 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B72B6342826CB6F14AB95F7D /* Pods_SeeFood.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DBAF14024B590B4DB05BEA40 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E46D403A0FC7E6CA0E065D8D /* Pods-SeeFood.debug.xcconfig */,
+				79EABED800B3DA59016E5D3A /* Pods-SeeFood.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		FBA65A4B217191CE005688EE = {
 			isa = PBXGroup;
 			children = (
 				FBA65A56217191CE005688EE /* SeeFood */,
 				FBA65A55217191CE005688EE /* Products */,
+				DBAF14024B590B4DB05BEA40 /* Pods */,
+				825D4388AC509657083A7547 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,6 +86,7 @@
 				FBA65A5E217191D1005688EE /* Assets.xcassets */,
 				FBA65A60217191D1005688EE /* LaunchScreen.storyboard */,
 				FBA65A63217191D1005688EE /* Info.plist */,
+				FBA65A692172218A005688EE /* CameraViewController.swift */,
 			);
 			path = SeeFood;
 			sourceTree = "<group>";
@@ -71,9 +98,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FBA65A66217191D1005688EE /* Build configuration list for PBXNativeTarget "SeeFood" */;
 			buildPhases = (
+				1034571D69DCC43F42153EFF /* [CP] Check Pods Manifest.lock */,
 				FBA65A50217191CE005688EE /* Sources */,
 				FBA65A51217191CE005688EE /* Frameworks */,
 				FBA65A52217191CE005688EE /* Resources */,
+				DC4B2B27E4E8E50380DA0B20 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -130,6 +159,49 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1034571D69DCC43F42153EFF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SeeFood-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DC4B2B27E4E8E50380DA0B20 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-SeeFood/Pods-SeeFood-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/CameraManager/CameraManager.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CameraManager.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SeeFood/Pods-SeeFood-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		FBA65A50217191CE005688EE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -137,6 +209,7 @@
 			files = (
 				FBA65A5A217191CE005688EE /* ViewController.swift in Sources */,
 				FBA65A58217191CE005688EE /* AppDelegate.swift in Sources */,
+				FBA65A6A2172218A005688EE /* CameraViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +353,7 @@
 		};
 		FBA65A67217191D1005688EE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E46D403A0FC7E6CA0E065D8D /* Pods-SeeFood.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -298,6 +372,7 @@
 		};
 		FBA65A68217191D1005688EE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 79EABED800B3DA59016E5D3A /* Pods-SeeFood.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
