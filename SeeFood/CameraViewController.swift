@@ -75,7 +75,8 @@ class CameraViewController: UIViewController {
         
         let jsonObject = JSON(jsonRequest)
         
-        Alamofire.request(googleURL, method: .post, parameters: jsonRequest, headers: httpHeaders).responseJSON { response in
+        Alamofire.request(googleURL, method: .post, parameters: jsonObject.dictionary, headers: httpHeaders).responseJSON { response in
+            print(jsonObject.dictionary)
             print(response)
         }
     }
