@@ -11,6 +11,7 @@ import AVFoundation
 import CameraManager
 import SwiftyJSON
 import Alamofire
+import Foundation
 
 class CameraViewController: UIViewController {
     let session = URLSession.shared
@@ -75,15 +76,54 @@ class CameraViewController: UIViewController {
         
         Alamofire.request(googleURL, method: .post, parameters: jsonRequest, encoding: JSONEncoding.default, headers: httpHeaders).responseJSON { response in
             //print(jsonRequest)
-            print(response)
+            if let resultData = response.result.value {
+                let jsonResultData = JSON(resultData)
+                self.handleFoodVectors(response: jsonResultData["responses"][0]["localizedObjectAnnotations"])
+            }
             //handleFoodVectors(response: response["responses"])
         }
     }
     
     func handleFoodVectors(response: JSON) {
+        var foodObjects: [[String: Any]] = [];
+        for i in 0...response.array!.count-1 {
+            let name = response[i]["name"].string
+            var xEs = 0.0
+            var yS = 0.0
+            for j in 0...response[i]["boundingPoly"]["normalizedVertices"].array!.count-1 {
+                let coordinateX = response[i]["boundingPoly"]["normalizedVertices"][j]["x"]
+                let coordinateY = response[i]["boundingPoly"]["normalizedVertices"][j]["y"]
+                //print(coordinateX);
+                xEs += coordinateX.doubleValue
+                yS += coordinateY.doubleValue
+            }
+            foodObjects.append([
+                "name" : name!,
+                "coordinate" : xEs + yS
+            ])
+        }
+        print(foodObjects)
         
+        var trackedCoordinates: [Double] = []
+        for i in 0...foodObjects.count-1 {
+            if foodObjects[i]["name"] as! String == "Food" {
+                trackedCoordinates.append(foodObjects[i]["coordinate"] as! Double)
+            }
+        }
+        sendToWolfram(name: "grape")
     }
-
+    
+    
+    func sendToWolfram(name: String) {
+        Alamofire.request("https://api.wolframalpha.com/v2/query?input=" + name + "&appid=AHG9EG-XHHQ6U7KAW&output=xml", method: .get).responseString { response in
+            if let responseString = response.value {
+                let beginningIndex = responseString.endIndex(of: "total calories ")!.encodedOffset + 1
+                let endIndex = responseString.index(of:" | fat calories")!.encodedOffset + 1
+                let calories = Double(responseString.substring(beginningIndex..<endIndex))
+                print(calories)
+            }
+        }
+    }
     /*
     // MARK: - Navigation
 
@@ -94,4 +134,81 @@ class CameraViewController: UIViewController {
     }
     */
 
+}
+
+extension StringProtocol where Index == String.Index {
+    func index(of string: Self, options: String.CompareOptions = []) -> Index? {
+        return range(of: string, options: options)?.lowerBound
+    }
+    func endIndex(of string: Self, options: String.CompareOptions = []) -> Index? {
+        return range(of: string, options: options)?.upperBound
+    }
+    func indexes(of string: Self, options: String.CompareOptions = []) -> [Index] {
+        var result: [Index] = []
+        var start = startIndex
+        while start < endIndex,
+            let range = self[start..<endIndex].range(of: string, options: options) {
+                result.append(range.lowerBound)
+                start = range.lowerBound < range.upperBound ? range.upperBound :
+                    index(range.lowerBound, offsetBy: 1, limitedBy: endIndex) ?? endIndex
+        }
+        return result
+    }
+    func ranges(of string: Self, options: String.CompareOptions = []) -> [Range<Index>] {
+        var result: [Range<Index>] = []
+        var start = startIndex
+        while start < endIndex,
+            let range = self[start..<endIndex].range(of: string, options: options) {
+                result.append(range)
+                start = range.lowerBound < range.upperBound ? range.upperBound :
+                    index(range.lowerBound, offsetBy: 1, limitedBy: endIndex) ?? endIndex
+        }
+        return result
+    }
+}
+
+public extension String {
+    
+    //right is the first encountered string after left
+    func between(_ left: String, _ right: String) -> String? {
+        guard
+            let leftRange = range(of: left), let rightRange = range(of: right, options: .backwards)
+            , leftRange.upperBound <= rightRange.lowerBound
+            else { return nil }
+        
+        let sub = self[leftRange.upperBound...]
+        let closestToLeftRange = sub.range(of: right)!
+        return String(sub[..<closestToLeftRange.lowerBound])
+    }
+    
+    var length: Int {
+        get {
+            return self.count
+        }
+    }
+    
+    func substring(to : Int) -> String {
+        let toIndex = self.index(self.startIndex, offsetBy: to)
+        return String(self[...toIndex])
+    }
+    
+    func substring(from : Int) -> String {
+        let fromIndex = self.index(self.startIndex, offsetBy: from)
+        return String(self[fromIndex...])
+    }
+    
+    func substring(_ r: Range<Int>) -> String {
+        let fromIndex = self.index(self.startIndex, offsetBy: r.lowerBound)
+        let toIndex = self.index(self.startIndex, offsetBy: r.upperBound)
+        let indexRange = Range<String.Index>(uncheckedBounds: (lower: fromIndex, upper: toIndex))
+        return String(self[indexRange])
+    }
+    
+    func character(_ at: Int) -> Character {
+        return self[self.index(self.startIndex, offsetBy: at)]
+    }
+    
+    func lastIndexOfCharacter(_ c: Character) -> Int? {
+        return range(of: String(c), options: .backwards)?.lowerBound.encodedOffset
+    }
 }
