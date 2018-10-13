@@ -58,27 +58,30 @@ class CameraViewController: UIViewController {
     
     func googleCloudRequest(data: String) {
         let httpHeaders: HTTPHeaders = [
-            "Content-Type": "application/json",
+            "Content-Type": "application/json"
         ]
-        let jsonRequest = [
-            "requests": [
-                    "image": [
-                        "imageUri": "https://static.adweek.com/adweek.com-prod/wp-content/uploads/2018/07/G_Boston-Pizza-July90107_RGB_v4.png"
-                    ],
-                    "features": [
-                        [
-                            "type": "OBJECT_LOCALIZATION"
-                        ]
+        let requestObj: [String: Any?] =
+            [
+                "image": [
+                    "content" : data
+                ],
+                "features": [
+                    [
+                        "type": "OBJECT_LOCALIZATION"
                     ]
+                ]
             ]
-        ]
+        let jsonRequest = ["requests": [requestObj]]
         
-        let jsonObject = JSON(jsonRequest)
-        
-        Alamofire.request(googleURL, method: .post, parameters: jsonObject.dictionary, headers: httpHeaders).responseJSON { response in
-            print(jsonObject.dictionary)
+        Alamofire.request(googleURL, method: .post, parameters: jsonRequest, encoding: JSONEncoding.default, headers: httpHeaders).responseJSON { response in
+            //print(jsonRequest)
             print(response)
+            //handleFoodVectors(response: response["responses"])
         }
+    }
+    
+    func handleFoodVectors(response: JSON) {
+        
     }
 
     /*
